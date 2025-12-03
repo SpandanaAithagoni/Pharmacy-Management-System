@@ -1,0 +1,45 @@
+from typing import Dict, List
+from src.dao.payment0_dao import PaymentDAO
+from src.dao.order0_dao import OrderDAO
+
+class PaymentError(Exception):
+    pass
+
+class PaymentService:
+    def __init__(self):
+        self.dao = PaymentDAO()
+        self.order_dao = OrderDAO()
+
+    def make_payment(self, order_id: int, method: str = "CASH") -> Dict:
+        """Make a payment for a PLACED order."""
+        order = self.order_dao.get_order_by_id(order_id)
+        if not order:
+            raise PaymentError("Order not found")
+        if order.get("status") != "PLACED":
+            raise PaymentError("Payment can only be made for PLACED orders")
+
+        payment = self.dao.create_payment(order_id, order["total_amount"], method)
+        self.order_dao.update_order(order_id, {"status": "COMPLETED"})
+        return payment
+
+    def refund_payment(self, payment_id: int) -> Dict:
+        """Refund a PAID payment and cancel the linked order."""
+        payment = self.dao.get_payment(payment_id)
+        if not payment:
+            raise PaymentError("Payment not found")
+        if payment.get("status") != "PAID":
+            raise PaymentError("Only PAID payments can be refunded")
+
+        refunded = self.dao.refund_payment(payment_id)
+        order_id = refunded.get("order_id")
+        self.order_dao.update_order(order_id, {"status": "CANCELLED"})
+        return refunded
+
+    def get_payment(self, payment_id: int) -> Dict:
+        payment = self.dao.get_payment(payment_id)
+        if not payment:
+            raise PaymentError("Payment not found")
+        return payment
+
+    def list_payments(self) -> List[Dict]:
+        return self.dao.list_payments()
