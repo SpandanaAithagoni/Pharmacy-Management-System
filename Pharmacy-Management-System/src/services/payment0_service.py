@@ -1,6 +1,6 @@
 from typing import Dict, List
-from src.dao.payment0_dao import PaymentDAO
-from src.dao.order0_dao import OrderDAO
+from dao import payment0_dao as payment_dao
+from dao import order0_dao as order_dao
 
 class PaymentError(Exception):
     pass
