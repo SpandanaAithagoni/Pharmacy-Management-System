@@ -1,6 +1,6 @@
 # src/dao/order0_dao.py
 from typing import List, Dict, Optional
-from src.config import get_supabase
+from config import get_supabase
 
 class OrderDAO:
     def __init__(self):
