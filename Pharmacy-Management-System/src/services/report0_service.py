@@ -1,8 +1,8 @@
 # src/services/report0_service.py
 from typing import Dict, List
-from src.dao.report0_dao import ReportDAO
-from src.dao.order0_dao import OrderDAO
-from src.dao.medicine0_dao import MedicineDAO
+from dao import report0_dao as report_dao
+from dao import order0_dao as order_dao
+import dao.medicine0_dao as medicine_dao
 
 class ReportError(Exception):
     pass
