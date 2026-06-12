@@ -1,6 +1,6 @@
 # src/dao/customer0_dao.py
 from typing import Optional, Dict, List
-from src.config import get_supabase
+from config import get_supabase
 
 class CustomerDAO:
     def __init__(self):
