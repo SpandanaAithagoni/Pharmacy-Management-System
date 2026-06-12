@@ -25,34 +25,17 @@ st.set_page_config(
     layout="wide"
 )
 
-medicine_service = MedicineService()
-customer_service = CustomerService()
-order_service = OrderService()
-payment_service = PaymentService()
-supplier_service = SupplierService()
-report_service = ReportService()
+try:
+    medicine_service = MedicineService()
+    customer_service = CustomerService()
+    order_service = OrderService()
+    payment_service = PaymentService()
+    supplier_service = SupplierService()
+    report_service = ReportService()
 
-st.sidebar.title("💊 Pharmacy Management System")
-
-menu = st.sidebar.radio(
-    "Navigation",
-    [
-        "Dashboard",
-        "Medicines",
-        "Customers",
-        "Orders",
-        "Payments",
-        "Suppliers",
-        "Reports"
-    ]
-)
-
-medicine_service = MedicineService()
-customer_service = CustomerService()
-order_service = OrderService()
-payment_service = PaymentService()
-supplier_service = SupplierService()
-report_service = ReportService()
+except Exception as e:
+    st.error(f"Database Connection Error: {e}")
+    st.stop()
 
 st.sidebar.title("💊 Pharmacy Management System")
 
@@ -92,7 +75,11 @@ if menu == "Dashboard":
         ]
 
         st.subheader("Low Stock Medicines")
-        st.dataframe(pd.DataFrame(low_stock))
+
+        if low_stock:
+            st.dataframe(pd.DataFrame(low_stock))
+        else:
+            st.success("No medicines are low in stock.")
 
     except Exception as e:
         st.error(str(e))
@@ -196,7 +183,9 @@ elif menu == "Orders":
                     }
                 ]
             )
+
             st.success("Order Created Successfully")
+
         except Exception as e:
             st.error(str(e))
 
@@ -218,7 +207,11 @@ elif menu == "Payments":
 
     method = st.selectbox(
         "Payment Method",
-        ["CASH", "CARD", "UPI"]
+        [
+            "CASH",
+            "CARD",
+            "UPI"
+        ]
     )
 
     if st.button("Make Payment"):
@@ -227,7 +220,9 @@ elif menu == "Payments":
                 order_id,
                 method
             )
+
             st.success("Payment Successful")
+
         except Exception as e:
             st.error(str(e))
 
@@ -256,7 +251,9 @@ elif menu == "Suppliers":
                     contact,
                     address
                 )
+
                 st.success("Supplier Added Successfully")
+
             except Exception as e:
                 st.error(str(e))
 
