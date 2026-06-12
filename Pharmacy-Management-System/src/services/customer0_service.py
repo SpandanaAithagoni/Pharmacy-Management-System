@@ -1,6 +1,6 @@
 # src/services/customer0_service.py
 from typing import Dict, List
-import src.dao.customer0_dao as customer_dao
+from dao import customer0_dao as customer_dao
 
 class CustomerError(Exception):
     pass
