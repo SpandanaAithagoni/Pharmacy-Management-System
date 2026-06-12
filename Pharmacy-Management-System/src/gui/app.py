@@ -1,3 +1,5 @@
+import streamlit as st
+import pandas as pd
 import sys
 import os
 
@@ -21,6 +23,28 @@ st.set_page_config(
     page_title="Pharmacy Management System",
     page_icon="💊",
     layout="wide"
+)
+
+medicine_service = MedicineService()
+customer_service = CustomerService()
+order_service = OrderService()
+payment_service = PaymentService()
+supplier_service = SupplierService()
+report_service = ReportService()
+
+st.sidebar.title("💊 Pharmacy Management System")
+
+menu = st.sidebar.radio(
+    "Navigation",
+    [
+        "Dashboard",
+        "Medicines",
+        "Customers",
+        "Orders",
+        "Payments",
+        "Suppliers",
+        "Reports"
+    ]
 )
 
 medicine_service = MedicineService()
