@@ -1,5 +1,5 @@
 from typing import Optional, Dict, List
-from src.config import get_supabase
+from config import get_supabase
 
 class ReportDAO:
     def __init__(self):
