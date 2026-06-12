@@ -1,5 +1,5 @@
 from typing import List, Dict, Optional
-from src.dao.supplier0_dao import SupplierDAO
+from dao import supplier0_dao as supplier_dao
 
 class SupplierError(Exception):
     pass
