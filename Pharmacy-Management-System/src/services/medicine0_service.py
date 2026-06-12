@@ -1,6 +1,6 @@
 # src/services/medicine_service.py
 from typing import List, Dict
-import src.dao.medicine0_dao as medicine_dao
+from dao import medicine0_dao as medicine_dao
 
 class MedicineError(Exception):
     pass
