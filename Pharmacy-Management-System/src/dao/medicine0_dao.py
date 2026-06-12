@@ -1,6 +1,6 @@
 # src/dao/medicine_dao.py
 from typing import Optional, List, Dict
-from src.config import get_supabase
+from config import get_supabase
 
 class MedicineDAO:
     def __init__(self):
