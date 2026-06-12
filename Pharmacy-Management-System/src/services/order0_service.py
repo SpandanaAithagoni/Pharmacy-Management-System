@@ -1,7 +1,7 @@
 # src/services/order0_service.py
 from typing import List, Dict, Optional
-from src.dao.order0_dao import OrderDAO
-from src.dao.medicine0_dao import MedicineDAO
+from dao import order0_dao as order_dao
+from dao import medicine0_dao as medicine_dao
 
 class OrderError(Exception):
     pass
