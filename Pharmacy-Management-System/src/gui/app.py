@@ -1,12 +1,21 @@
-import streamlit as st
-import pandas as pd
+import sys
+import os
 
-from src.services.medicine0_service import MedicineService
-from src.services.customer0_service import CustomerService
-from src.services.order0_service import OrderService
-from src.services.payment0_service import PaymentService
-from src.services.supplier0_service import SupplierService
-from src.services.report0_service import ReportService
+sys.path.append(
+    os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            ".."
+        )
+    )
+)
+
+from services.medicine0_service import MedicineService
+from services.customer0_service import CustomerService
+from services.order0_service import OrderService
+from services.payment0_service import PaymentService
+from services.supplier0_service import SupplierService
+from services.report0_service import ReportService
 
 st.set_page_config(
     page_title="Pharmacy Management System",
